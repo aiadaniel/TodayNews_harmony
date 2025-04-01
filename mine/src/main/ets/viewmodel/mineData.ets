@@ -15,138 +15,128 @@ const memberButton: IconButtonModel[] = [
 
 
 const swiperImage: Resource[] = [
-$r('app.media.1'),
-$r('app.media.2'),
-$r('app.media.3'),
+  $r('app.media.1'),
+  $r('app.media.2'),
+  $r('app.media.3'),
 ]
 
 
 const productDataList: Array<productModel> = [
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '11月12'
-    },
-    icon: $r('app.media.product1'),
-    text: $r('app.string.content10'),
-    likeCount: 20,
-    commentCount: 10
-  },
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '10月21'
-    },
-    icon: $r('app.media.product2'),
-    text: $r('app.string.content1'),
-    likeCount: 9,
-    commentCount: 234
-
-  },
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '1月9'
-    },
-    icon: $r('app.media.product3'),
-    text: $r('app.string.content2'),
-    likeCount: 0,
-    commentCount: 0
-
-  },
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '9月20'
-    },
-    icon: $r('app.media.product4'),
-    text: $r('app.string.content3'),
-    likeCount: 899,
-    commentCount: 0
-
-  },
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '12月30'
-    },
-    icon: $r('app.media.product5'),
-    text: $r('app.string.content4'),
-    likeCount: 0,
-    commentCount: 2
-
-  }
-
+  new productModel(
+    new profileInfo(
+      $r('app.media.avatar'),
+      $r('app.string.nickName'),
+      '11月12'
+    ),
+    $r('app.media.product1'),
+    $r('app.string.content10'),
+    20,
+    10
+  )
+  // {
+  //   profile: {
+  //     profileImg: $r('app.media.avatar'),
+  //     nickName: $r('app.string.nickName'),
+  //     time: '10月21'
+  //   },
+  //   icon: $r('app.media.product2'),
+  //   text: $r('app.string.content1'),
+  //   likeCount: 9,
+  //   commentCount: 234
+  // },
+  // {
+  //   profile: {
+  //     profileImg: $r('app.media.avatar'),
+  //     nickName: $r('app.string.nickName'),
+  //     time: '1月9'
+  //   },
+  //   icon: $r('app.media.product3'),
+  //   text: $r('app.string.content2'),
+  //   likeCount: 0,
+  //   commentCount: 0
+  // },
+  // {
+  //   profile: {
+  //     profileImg: $r('app.media.avatar'),
+  //     nickName: $r('app.string.nickName'),
+  //     time: '9月20'
+  //   },
+  //   icon: $r('app.media.product4'),
+  //   text: $r('app.string.content3'),
+  //   likeCount: 899,
+  //   commentCount: 0
+  // },
+  // {
+  //   profile: {
+  //     profileImg: $r('app.media.avatar'),
+  //     nickName: $r('app.string.nickName'),
+  //     time: '12月30'
+  //   },
+  //   icon: $r('app.media.product5'),
+  //   text: $r('app.string.content4'),
+  //   likeCount: 0,
+  //   commentCount: 2
+  // }
 ]
 
 
 const productCollectDataList: Array<productModel> = [
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '5月21'
-    },
-    icon: $r('app.media.product6'),
-    text: $r('app.string.content9'),
-    likeCount: 20,
-    commentCount: 10
-  },
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '10月21'
-    },
-    icon: $r('app.media.product7'),
-    text: $r('app.string.content8'),
-    likeCount: 9,
-    commentCount: 234
-
-  },
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '1月9'
-    },
-    icon: $r('app.media.product8'),
-    text: $r('app.string.content7'),
-    likeCount: 0,
-    commentCount: 0
-
-  },
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '9月20'
-    },
-    icon: $r('app.media.product9'),
-    text: $r('app.string.content6'),
-    likeCount: 899,
-    commentCount: 0
-
-  },
-  {
-    profile: {
-      profileImg: $r('app.media.avatar'),
-      nickName: $r('app.string.nickName'),
-      time: '12月30'
-    },
-    icon: $r('app.media.product10'),
-    text: $r('app.string.content5'),
-    likeCount: 0,
-    commentCount: 2
-
-  }
-
+  new productModel(
+    new profileInfo(
+      $r('app.media.avatar'),
+      $r('app.string.nickName'),
+      '5月21'
+    ),
+    $r('app.media.product6'),
+    $r('app.string.content9'),
+    20,
+    10
+  ),
+  // {
+  //   profile: {
+  //     profileImg: $r('app.media.avatar'),
+  //     nickName: $r('app.string.nickName'),
+  //     time: '10月21'
+  //   },
+  //   icon: $r('app.media.product7'),
+  //   text: $r('app.string.content8'),
+  //   likeCount: 9,
+  //   commentCount: 234
+  // },
+  // {
+  //   profile: {
+  //     profileImg: $r('app.media.avatar'),
+  //     nickName: $r('app.string.nickName'),
+  //     time: '1月9'
+  //   },
+  //   icon: $r('app.media.product8'),
+  //   text: $r('app.string.content7'),
+  //   likeCount: 0,
+  //   commentCount: 0
+  // },
+  // {
+  //   profile: {
+  //     profileImg: $r('app.media.avatar'),
+  //     nickName: $r('app.string.nickName'),
+  //     time: '9月20'
+  //   },
+  //   icon: $r('app.media.product9'),
+  //   text: $r('app.string.content6'),
+  //   likeCount: 899,
+  //   commentCount: 0
+  // },
+  // {
+  //   profile: {
+  //     profileImg: $r('app.media.avatar'),
+  //     nickName: $r('app.string.nickName'),
+  //     time: '12月30'
+  //   },
+  //   icon: $r('app.media.product10'),
+  //   text: $r('app.string.content5'),
+  //   likeCount: 0,
+  //   commentCount: 2
+  // }
 ]
 
 
-export { memberButton, swiperImage,productDataList,productCollectDataList }
+export { memberButton, swiperImage, productDataList, productCollectDataList }

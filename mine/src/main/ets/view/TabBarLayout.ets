@@ -1,26 +1,17 @@
-
 @Component
 export struct TabBarLayout {
-  // 字体大小
-  private fontSizeNormal = 16
-  // tab左右margin
-  private tabMargin = 15
   // 标题列表，由父组件初始化
   @Link titleArr: string[]
   // tab标签选中position
   @Link currentIndex: number
-
-  tabBarHeight?:number = 50;
-
-  flexAlign?:FlexAlign = FlexAlign.Start;
-
-  barStyle?:BarSelectStyle = BarSelectStyle.scale
-
-  private left: number= 0
-  // tab标签选中监听 父类可重写
-  private tabSelected: (position: number, title: string) => void = (position: number, title: string) => {
-    console.log('tabSelected position = ' + position + ', title = ' + title)
-  }
+  tabBarHeight?: number = 50;
+  flexAlign?: FlexAlign = FlexAlign.Start;
+  barStyle?: BarSelectStyle = BarSelectStyle.scale
+  // 字体大小
+  private fontSizeNormal = 16
+  // tab左右margin
+  private tabMargin = 15
+  private left: number = 0
   @State private tabDataArr: TabModel[] = []
   private scroller: Scroller = new Scroller()
 
@@ -41,16 +32,18 @@ export struct TabBarLayout {
   build() {
     Scroll(this.scroller) {
 
-
-      Flex({ direction: FlexDirection.Row , justifyContent: this.flexAlign }) {
+      Flex({ direction: FlexDirection.Row, justifyContent: this.flexAlign }) {
         ForEach(this.tabDataArr, (item: TabModel) => {
           Flex({ direction: FlexDirection.Column, justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
             Text(item.content)
-              .fontSize(this.currentIndex == item.index ?( this.fontSizeNormal + (this.barStyle === BarSelectStyle.normal ?0: 3 )): this.fontSizeNormal)
-              .fontColor(this.currentIndex == item.index ? (this.barStyle === BarSelectStyle.normal ?Color.Black:Color.Red) : Color.Black)
-              .fontWeight(this.currentIndex == item.index ? (this.barStyle === BarSelectStyle.normal ?FontWeight.Normal:FontWeight.Bold) : FontWeight.Normal)
+              .fontSize(this.currentIndex == item.index ?
+                (this.fontSizeNormal + (this.barStyle === BarSelectStyle.normal ? 0 : 3)) : this.fontSizeNormal)
+              .fontColor(this.currentIndex == item.index ?
+                (this.barStyle === BarSelectStyle.normal ? Color.Black : Color.Red) : Color.Black)
+              .fontWeight(this.currentIndex == item.index ?
+                (this.barStyle === BarSelectStyle.normal ? FontWeight.Normal : FontWeight.Bold) : FontWeight.Normal)
               .textAlign(TextAlign.Center)
-
+            // 选中的标签下方小条
             Column()
               .height(3)
               .width(item.width - this.tabMargin * 2)
@@ -69,22 +62,26 @@ export struct TabBarLayout {
               this.tabSelected(item.index, item.content)
             }
           })
-        }, item => item.index)
+        }/*, (item: TabModel) => item.index*/)//todo lxm
       }
 
-
-
     }
+
     // .scrollable(ScrollDirection.Horizontal)
 
-
   }
+
   // 滚动至中间位置
-  scrollToCenter(itemLeft: number, itemWidth: number): void{
+  scrollToCenter(itemLeft: number, itemWidth: number): void {
     console.log('scrollToCenter  itemLeft = ' + itemLeft)
     let targetOffset: number = itemLeft + itemWidth / 2 - 180
     console.log('scrollToCenter  targetOffset = ' + targetOffset)
     this.scroller.scrollTo({ xOffset: targetOffset, yOffset: 0, animation: { duration: 200, curve: Curve.EaseInOut } })
+  }
+
+  // tab标签选中监听 父类可重写
+  private tabSelected: (position: number, title: string) => void = (position: number, title: string) => {
+    console.log('tabSelected position = ' + position + ', title = ' + title)
   }
 }
 
@@ -95,10 +92,10 @@ enum BarSelectStyle {
 
 
 export class TabModel {
-  index: number
-  content: string
-  left: number
-  width: number
+  index: number = 0
+  content: string = ''
+  left: number = 0
+  width: number = 0
 }
 
-export {BarSelectStyle}
+export { BarSelectStyle }

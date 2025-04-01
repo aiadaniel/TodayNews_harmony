@@ -1,5 +1,4 @@
 class CategoryTitleViewModel {
-
   // static readonly TabBars_DEFAULT_NEWS_TYPES: Array<NewsTypeBean> = [
   //   { id: 0, name: '全部' },
   //   { id: 1, name: '国内' },
@@ -21,7 +20,6 @@ class CategoryTitleViewModel {
     '数码',
 
   ];
-
 
   // getDefaultCategoryList():NewsTypeBean[]{
   //

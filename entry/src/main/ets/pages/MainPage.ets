@@ -1,7 +1,7 @@
-import { tabBarInfoList, TabBarInfoModel } from '../Model/TabBarInfoModel'
-import { VideoPage } from 'video'
-import { MinePage } from 'mine'
-import { HomePage } from 'home'
+import { tabBarInfoList, TabBarInfoModel } from '../Model/TabBarInfoModel';
+import { VideoPage } from 'video';
+import { MinePage } from 'mine';
+import { HomePage } from 'home';
 
 @Entry
 @Component
@@ -16,39 +16,44 @@ struct MainPage {
         ForEach(tabBarInfoList, (item: TabBarInfoModel, index: number) => {
           TabContent() {
             if (index === 0) {
+              //首页
               HomePage()
             } else if (index === 1) {
+              //视频
               VideoPage({ tabCurrentIndex: $currentPageIndex })
             } else if (index === 2) {
-
+              //商城
             } else if (index === 3) {
+              //我的
               MinePage()
             }
 
           }.tabBar(this.BottomNavigation(tabBarInfoList[index]))
-        }, item => JSON.stringify(item))
+        }, (item: TabBarInfoModel) => JSON.stringify(item))
       }
       .barWidth('100%')
       .barHeight(56)
       .scrollable(false)
-
       .onChange((index: number) => {
         this.currentPageIndex = index;
       })
 
     }
-    .backgroundColor(this.currentPageIndex === 1 ? Color.Black : Color.White)
+    .backgroundColor(this.currentPageIndex === 1 ? Color.Black : Color.White)//视频标签页黑背景
 
   }
 
-  @Builder BottomNavigation(button: TabBarInfoModel) {
+  @Builder
+  BottomNavigation(button: TabBarInfoModel) {
     Column({ space: 6 }) {
-      Image(this.currentPageIndex === button.index ? button.selectImg : (this.currentPageIndex===1?button.whiteImg:button.normalImg))
+      Image(this.currentPageIndex === button.index ? button.selectImg :
+        (this.currentPageIndex === 1 ? button.whiteImg : button.normalImg))
         .objectFit(ImageFit.Contain)
         .width(24)
         .height(24)
       Text(button.title)
-        .fontColor(this.currentPageIndex === button.index ? '#e92f4f' : (this.currentPageIndex===1?Color.White:Color.Black))
+        .fontColor(this.currentPageIndex === button.index ? '#e92f4f' :
+          (this.currentPageIndex === 1 ? Color.White : Color.Black))
         .opacity(this.currentPageIndex === button.index ? 1 : 0.6)
         .fontWeight(500)
         .textAlign(TextAlign.Center)

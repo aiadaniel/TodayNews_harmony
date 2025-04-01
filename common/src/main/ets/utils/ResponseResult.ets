@@ -1,5 +1,3 @@
-
-
 export class ResponseResult {
   code: string;
   msg: string | Resource;

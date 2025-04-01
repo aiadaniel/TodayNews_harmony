@@ -1,9 +1,8 @@
-
 import { Constants } from '../constants/Constants'
 
 
 @Component
-export  struct NoMoreLayout {
+export struct NoMoreLayout {
   build() {
     Row() {
       Text('没有更多数据了')
@@ -15,6 +14,4 @@ export  struct NoMoreLayout {
     .justifyContent(FlexAlign.Center)
     .height(70)
   }
-
-
 }

@@ -8,16 +8,15 @@ export struct videoContent {
   @Link @Watch("changeIndex") swiperIndex: number;
   @Link @Watch("changeIndex") isPlay: boolean;
   @State item: VideoItem = new VideoItem();
-  private barPosition: number = 0;
   @State playState: PlayState = PlayState.STOP;
   controller: VideoController = new VideoController()
+  private barPosition: number = 0;
 
   changeIndex() {
     if (this.barPosition === this.swiperIndex) {
       if (this.isPlay) {
         this.play();
       }
-
     } else {
       this.stop();
     }
@@ -38,13 +37,11 @@ export struct videoContent {
   }
 
   aboutToAppear() {
-
     if (this.barPosition === 0) {
       this.playState = PlayState.START;
     } else {
       this.playState = PlayState.STOP;
     }
-
   }
 
   build() {

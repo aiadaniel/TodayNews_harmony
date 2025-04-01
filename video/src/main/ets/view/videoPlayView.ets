@@ -1,28 +1,25 @@
-
-import { PlayState, VideoItem } from '../viewModel/VideoViewModel';
+import { VideoItem } from '../viewModel/VideoViewModel';
 import { videoContent } from './videoContent';
 
-
 @Component
-export struct  videoPlayView {
+export struct videoPlayView {
   @State swiperIndex: number = 0;
   @Link videoArray: Array<VideoItem>;
-
   @Link play: boolean;
 
-  build(){
+  build() {
 
-    Swiper(){
-       ForEach(this.videoArray,(videos:VideoItem,index:number)=>{
+    Swiper() {
+      ForEach(this.videoArray, (videos: VideoItem, index: number) => {
 
-         videoContent({
-           swiperIndex:$swiperIndex,
-           item:videos,
-           barPosition:index,
-           isPlay:$play
-         })
+        videoContent({
+          swiperIndex: $swiperIndex,
+          item: videos,
+          barPosition: index,
+          isPlay: $play//todo 符号
+        })
 
-       },videos=>JSON.stringify(videos))
+      }, (videos: VideoItem) => JSON.stringify(videos))
     }
     .width("100%")
     .height("100%")
@@ -33,7 +30,5 @@ export struct  videoPlayView {
       this.swiperIndex = swiper;
     })
 
-
   }
-
 }

@@ -1,6 +1,6 @@
-import { DataModel } from '../model/DataModel'
-import NewsDataViewModel from '../viewmodel/NewsDataViewModel'
-import systemTime from '@ohos.systemDateTime'
+import { DataModel } from '../model/DataModel';
+import NewsDataViewModel from '../viewmodel/NewsDataViewModel';
+import systemTime from '@ohos.systemDateTime';
 import { FailureLayout, LoadingLayout, RefreshPullView, ResponseResult } from 'common';
 import { PageState } from 'common/src/main/ets/constants/Constants';
 import { TopNewsView } from './TopNewsView';
@@ -13,7 +13,7 @@ import router from '@ohos.router';
 @Component
 export default struct NewsDataList {
   @Watch('changeCategory') @Link categoryId: number;
-  pageIndex: number;
+  pageIndex: number = 0;
   @State dataList: Array<DataModel> = [];
   @State currentPage: number = 1;
   @State pageCount: number = 20;
@@ -27,22 +27,18 @@ export default struct NewsDataList {
   @State pageState: PageState = PageState.Loading;
 
   changeCategory() {
-
     if (this.categoryId === this.pageIndex) {
       this.refreshNewsData();
     }
-
   }
 
   aboutToAppear() {
-
     if (this.categoryId === 0 && this.pageIndex === 0) {
       this.refreshNewsData();
     }
   }
 
   refreshNewsData() {
-
     return new Promise<string>((resolve, reject) => {
       NewsDataViewModel.getNewsList(this.currentPage, this.categoryId)
         .then((data: ResponseResult) => {
@@ -54,14 +50,10 @@ export default struct NewsDataList {
         }).catch(() => {
         resolve('')
       })
-
     })
-
-
   }
 
   loadMoreNewsData() {
-
     return new Promise<string>((resolve, reject) => {
       systemTime.getCurrentTime(false, (error, time) => {
         this.timeStamp = Math.trunc(time / 1000);
@@ -79,6 +71,43 @@ export default struct NewsDataList {
     })
   }
 
+  build() {
+
+    Column() {
+
+      if (this.pageState === PageState.Loading) {
+        // 加载页面
+        LoadingLayout()
+      } else if (this.pageState === PageState.Success) {
+        Stack() {
+          // 数据列表页面
+          this.ListLayout()
+        }
+      } else {
+        // 加载失败页面
+        FailureLayout({
+          reloadAction: () => {
+            this.loadMoreNewsData()
+          }
+        })
+      }
+
+    }
+
+  }
+
+  @Builder
+  ListLayout() {
+    RefreshPullView({
+      dataCount: this.tipCount,
+      onRefresh: (): Promise<string> => this.refreshNewsData(),
+      onLoadMore: (): Promise<string> => this.loadMoreNewsData(),
+      customList: () => {
+        this.getListView()
+      }
+    })
+  }
+
   @Builder
   private getListView() {
 
@@ -88,16 +117,13 @@ export default struct NewsDataList {
           // 置顶
           if (item.label) {
             TopNewsView({ itemData: item })
-
           } else if (item.more_mode === true) {
             // 三图
             MoreNewsView({ itemData: item })
-          }
-          else if (item.middle_mode === true) {
+          } else if (item.middle_mode === true) {
             // 右侧有图
             MiddleNewsView({ itemData: item })
-          }
-          else if (item.large_mode === true) {
+          } else if (item.large_mode === true) {
             // 视频
             LargeNewsView({ itemData: item })
           }
@@ -106,57 +132,14 @@ export default struct NewsDataList {
             Text(item.title)
               .height(100)
           }
-
         }
-        .onClick(()=>{
-          router.pushUrl({url:"@bundle:com.news.today/home/ets/pages/DetailPage",params:item})
-
+        .onClick(() => {
+          //新闻详情页
+          router.pushUrl({ url: "@bundle:com.news.today/home/ets/pages/DetailPage", params: item })
         })
-      }, item => JSON.stringify(item))
+      }, (item: DataModel) => JSON.stringify(item))
 
     }
     .backgroundColor(Color.White)
-
-  }
-
-  @Builder ListLayout() {
-
-    RefreshPullView({
-      dataCount: this.tipCount,
-      onRefresh: () => this.refreshNewsData(),
-      onLoadMore: () => this.loadMoreNewsData(),
-      customList: () => {
-        this.getListView()
-      }
-
-    })
-
-  }
-
-  build() {
-
-    Column() {
-
-      if (this.pageState === PageState.Loading) {
-        // 加载页面
-        LoadingLayout()
-
-      } else if (this.pageState === PageState.Success) {
-
-        Stack() {
-          // 数据列表页面
-          this.ListLayout()
-        }
-
-      } else {
-
-        // 加载失败页面
-        FailureLayout({ reloadAction: () => {
-          this.loadMoreNewsData()
-        } })
-      }
-
-    }
-
   }
 }

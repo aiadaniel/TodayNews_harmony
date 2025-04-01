@@ -19,37 +19,29 @@ struct DetailPage {
     const params = router.getParams() as DataModel;
     this.article = params;
 
-    this.mediaInfo = this.article.media_info;
+    this.mediaInfo = this.article.media_info!;
 
     // this.getHtmlData();
-
   }
 
   getHtmlData() {
-
     return new Promise<string>((resolve, reject) => {
       NewsDataViewModel.getArticleHtmlData(this.article.tag_id)
         .then((data: ResponseResult) => {
           this.pageState = PageState.Success;
-
           this.htmlStr = data.data as string;
           this.loadHtml()
           resolve('刷新成功')
-        }).catch((error) => {
+        }).catch((error: Error) => {
         resolve('')
       })
-
     })
-
-
   }
 
   loadHtml() {
-
     try {
       this.controller.loadData(
         `${this.htmlStr}`,
-
         "text/html",
         "UTF-8"
       )
@@ -62,7 +54,8 @@ struct DetailPage {
 
   }
 
-  @Builder NavBar() {
+  @Builder
+  NavBar() {
     Row() {
       Image($r('app.media.back_normal_new_Normal'))
         .width(24)
@@ -92,11 +85,11 @@ struct DetailPage {
       }
       .margin({ right: 15 })
 
-      Search({placeholder:"搜你想看的"})
+      Search({ placeholder: "搜你想看的" })
         .backgroundColor('#F1F2F2')
         .height(34)
         .placeholderColor('#6E6E6E')
-        .placeholderFont({size:13,style:FontStyle.Normal})
+        .placeholderFont({ size: 13, style: FontStyle.Normal })
         .width("40%")
       Blank()
       Image($r('app.media.audio_more_Normal'))
@@ -115,16 +108,13 @@ struct DetailPage {
 
   build() {
     Column() {
-
       this.NavBar()
-
       Web({
         src: this.article.article_url, controller: this.controller
       })
         .javaScriptAccess(true)
         .height('90%')
         .width('100%')
-
     }
     .height('100%')
   }

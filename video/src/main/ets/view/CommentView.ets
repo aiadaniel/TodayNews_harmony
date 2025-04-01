@@ -4,7 +4,7 @@ import { VideoItem } from '../viewModel/VideoViewModel';
 export struct CommentView {
   @ObjectLink private item: VideoItem;
 
-  build() {
+  build() {//侧边信息 圆角头像 点赞 评论 分享 收藏
     Column() {
       Image($r('app.media.head_Norma'))
         .width(40)
@@ -17,7 +17,8 @@ export struct CommentView {
           radius: 20
         })
 
-      Image(this.item.isLikes ? $r('app.media.digg_heart_selected_icon_32_Normal') : $r('app.media.audio_detail_action_like_seleted_Normal'))
+      Image(this.item.isLikes ? $r('app.media.digg_heart_selected_icon_32_Normal') :
+      $r('app.media.audio_detail_action_like_seleted_Normal'))
         .width(40)
         .height(40)
         .onClick(() => {
@@ -55,8 +56,7 @@ export struct CommentView {
         .margin({ top: 10 })
       Text(this.item.favor === 0 ? "收藏" : (this.item.favor.toString()))
         .fontColor(Color.White)
-    }.offset({x:-20,y:-100})
-
+    }.offset({ x: -20, y: -100 })
 
   }
 }

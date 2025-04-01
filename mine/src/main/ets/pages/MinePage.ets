@@ -1,4 +1,4 @@
-import { iconDockView, otherView } from '../view/otherView'
+import { iconDockView } from '../view/otherView'
 import { productLayout } from '../view/productLayout'
 import { BarSelectStyle, TabBarLayout } from '../view/TabBarLayout'
 import { navBarView, topBackgroundView } from '../view/topBackgroundView'
@@ -7,7 +7,6 @@ import { memberButton, swiperImage } from '../viewmodel/mineData'
 @Entry
 @Component
 export struct MinePage {
-  private arr: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   scroller: Scroller = new Scroller()
   @State colorNavBar: string = 'rgba(255,255,255,0)'
   @State offsetY: number = 0
@@ -16,12 +15,13 @@ export struct MinePage {
   @State titleArr: string[] = ['作品', '收藏']
   @State currentIndex: number = 0
   tabHeight: number = 50
-  private scrollY: number = 0
   @State headerHeight: number = (250 + 150 + 130 + 110 + 5)
   @State tabPosY: number = this.headerHeight
   navHeight: number = 56;
-  private swiperController: SwiperController = new SwiperController()
   @State listPosition: number = 0;
+  private arr: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  private scrollY: number = 0
+  private swiperController: SwiperController = new SwiperController()
 
   @Builder
   CustomSwiper() {
@@ -43,21 +43,19 @@ export struct MinePage {
 
     Stack({ alignContent: Alignment.Top }) {
 
+      navBarView({ opNav: this.opNav, colorNavBar: this.colorNavBar })// 顶部  扫码 发布 设置
 
-      navBarView({ opNav: this.opNav, colorNavBar: this.colorNavBar })
-
-      TabBarLayout({
-        titleArr: $titleArr,
+      TabBarLayout({//作品和收藏tab
+        titleArr: $titleArr,// 旧版引用变量传递 新版next以后配合link等装饰器？
         currentIndex: $currentIndex,
         tabBarHeight: this.tabHeight,
-        flexAlign:FlexAlign.Center,
-        barStyle:BarSelectStyle.normal,
+        flexAlign: FlexAlign.Center,
+        barStyle: BarSelectStyle.normal,
         tabSelected: (position: number, title: string) => {
 
         }
       })
-        .width('100%')
-          // .markAnchor({ x: 0, y: 0 })
+        .width('100%')// .markAnchor({ x: 0, y: 0 })
         .position({ y: this.tabPosY, x: 0 })
         .backgroundColor(Color.White)
         .zIndex(2)
@@ -66,23 +64,24 @@ export struct MinePage {
       Scroll(this.scroller) {
         Column() {
 
-          topBackgroundView({ scaleValue: this.scaleValue })
-          iconDockView({ buttons: memberButton })
-          this.CustomSwiper()
+          topBackgroundView({ scaleValue: this.scaleValue })//顶部图片背景
 
-          Row().height(10)
+          iconDockView({ buttons: memberButton })//网格布局 8格
+
+          this.CustomSwiper()//banner
+
+          Row().height(10)//灰色条状分隔符
             .backgroundColor(0xF2F1F2)
             .width('100%')
 
-
-          Swiper(this.swiperController) {
-            ForEach(this.titleArr, (item) => {
+          Swiper(this.swiperController) {//作品和收藏部分
+            ForEach(this.titleArr, (item: string) => {
               Column() {
                 // Text('Page ' + item).fontSize(25).margin(10)
                 productLayout({ currentIndex: $currentIndex })
               }
 
-            }, item => item)
+            }, (item: string) => item)
           }
           .index(0)
           .autoPlay(false)
@@ -114,7 +113,6 @@ export struct MinePage {
         }
         this.opNav = this.offsetY / 56;
         this.colorNavBar = `rgba(255,255,255,${this.opNav})`
-
 
         this.scrollY += yOffset
         console.log('=====sss===' + this.scrollY + "==" + (this.headerHeight))

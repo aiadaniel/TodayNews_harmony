@@ -1,10 +1,7 @@
-
-import { productDataList,productCollectDataList } from '../viewmodel/mineData';
+import { productDataList, productCollectDataList } from '../viewmodel/mineData';
 
 export class LocalDataManager {
-
   private static localDataManager: LocalDataManager;
-
 
   static instance() {
     if (!LocalDataManager.localDataManager) {
@@ -21,7 +18,6 @@ export class LocalDataManager {
   queryProductCollectList() {
     return productCollectDataList;
   }
-
 }
 
 

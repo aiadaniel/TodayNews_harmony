@@ -1,11 +1,8 @@
-
-
-
-export  class TabBarInfoModel {
+export class TabBarInfoModel {
   index: number = 0;
   normalImg: Resource = $r('app.media.new_home_tabbar_Normal');
   selectImg: Resource = $r('app.media.new_home_tabbar_press_Normal');
-  whiteImg:Resource = $r('app.media.new_refresh_tabbar_press_Normal')
+  whiteImg: Resource = $r('app.media.new_refresh_tabbar_press_Normal')
   title: Resource = $r('app.string.home');
 }
 

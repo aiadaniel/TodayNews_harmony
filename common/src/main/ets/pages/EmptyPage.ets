@@ -1,5 +1,5 @@
-
 import { ResManager } from '../constants/ResManager'
+
 @Component
 export struct EmptyPage {
   @State message: string = '空页面'

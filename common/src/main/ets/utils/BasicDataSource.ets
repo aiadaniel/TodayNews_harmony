@@ -1,14 +1,12 @@
-
-
-export  class BasicDataSource implements IDataSource {
+export class BasicDataSource implements IDataSource {
   private listeners: DataChangeListener[] = [];
 
   public totalCount(): number {
     return 0;
   }
 
-  public getData(index: number): any {
-    return undefined;
+  public getData(index: number): Object {
+    throw new Error("Method not implemented.");
   }
 
   registerDataChangeListener(listener: DataChangeListener): void {

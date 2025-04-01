@@ -1,15 +1,15 @@
 import { IconButtonModel } from '../viewmodel/IconButtonModel';
 
-import { ResManager } from 'common';
 
 
 @Component
 export struct IconButton {
   @ObjectLink props: IconButtonModel;
+  private imgWH: number = 30;
+
   click?: (key: number) => void = () => {
   };
 
-  private imgWH:number = 30;
   build() {
     Column() {
       if (this.props.count) {

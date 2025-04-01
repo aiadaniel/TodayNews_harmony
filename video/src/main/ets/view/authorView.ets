@@ -5,8 +5,8 @@ import { VideoItem } from '../viewModel/VideoViewModel';
 export struct authorView {
   @ObjectLink private item: VideoItem;
 
-  build() {
-    Column({space:10}) {
+  build() {//底部up信息 名字 签名
+    Column({ space: 10 }) {
       Text("@" + this.item.author)
         .fontColor(Color.White)
         .fontSize(16)
@@ -19,17 +19,17 @@ export struct authorView {
         .maxLines(2)
         .width('100%')
 
-      Row(){
+      Row() {
 
-       Image($r('app.media.music_Normal'))
-         .height(20)
-         .width(20)
-         .margin({right:10})
-        Marquee({
-          start:true,
-          loop:-1,
-          fromStart:true,
-          src:this.item.music
+        Image($r('app.media.music_Normal'))
+          .height(20)
+          .width(20)
+          .margin({ right: 10 })
+        Marquee({//走马灯
+          start: true,
+          loop: -1,
+          fromStart: true,
+          src: this.item.music
         })
           .width(100)
           .height(20)
@@ -40,7 +40,7 @@ export struct authorView {
 
     }
     .alignItems(HorizontalAlign.Start)
-    .margin({left:20,right:20,bottom:10})
+    .margin({ left: 20, right: 20, bottom: 10 })
 
   }
 }

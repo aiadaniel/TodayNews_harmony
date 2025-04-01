@@ -1,45 +1,32 @@
-import { ResManager, StyleConstants } from "common"
-import CategoryTabBar from '../view/CategoryTabbar'
+import { ResManager, StyleConstants } from 'common';
+import CategoryTabBar from '../view/CategoryTabbar';
 
 
-const searchSwiper: string[] = [
-  '羽绒服跌下神坛了吗',
-  '打通经济社会发展',
-  "以国之名 接英雄回家",
-  "马航MH370"
-]
+const searchSwiper: string[] = ['鸡你太美', '看点', "openai", "deepseek"]
 
 @Entry
 @Component
 export struct HomePage {
+  @State needChange: boolean = false;
 
-  @State needChange:boolean = false;
   @Builder
   SearchTitle() {
 
     Flex({ justifyContent: FlexAlign.SpaceBetween }) {
-      Row() {
+      Row() {//顶部搜索框
         Image($r('app.media.topbar_isolated_search_icon_Normal'))
           .width($r('app.float.vp_twenty'))
           .height($r('app.float.vp_twenty'))
           .margin({
-            left: $r('app.float.vp_twelve'),
-            right: $r('app.float.vp_eight')
+            left: $r('app.float.vp_twelve'), right: $r('app.float.vp_eight')
           })
-        Swiper() {
+        Swiper() {//垂直轮播
           ForEach(searchSwiper, (item: Resource) => {
             Column() {
-              Text(item)
-                .fontSize($r('app.float.small_font_size'))
-                .fontColor(Color.Black)
-            }
-            .alignItems(HorizontalAlign.Start)
+              Text(item).fontSize($r('app.float.small_font_size')).fontColor(Color.Black)
+            }.alignItems(HorizontalAlign.Start)
           }, (item: Resource) => JSON.stringify(item))
-        }
-        .autoPlay(true)
-        .loop(true)
-        .vertical(true)
-        .indicator(false)
+        }.autoPlay(true).loop(true).vertical(true).indicator(false)
       }
       .width('90%')
       .height($r('app.float.search_swiper_height'))
@@ -47,7 +34,7 @@ export struct HomePage {
       .backgroundColor(Color.White)
       .margin({ right: 10 })
 
-      Column() {
+      Column() {//发布按钮
         Image($r('app.media.add_more_video_Normal'))
           .height(24)
           .width(24)
@@ -56,16 +43,9 @@ export struct HomePage {
           .borderColor(ResManager.getDefaultColor())
           .margin({ top: 2 })
         Blank().height($r('app.float.vp_two'))
-        Text('发布')
-          .fontSize(9)
-          .fontColor(Color.White)
-          .fontWeight(FontWeight.Bold)
-      }
-      .width('10%')
-    }
-    .width(StyleConstants.FULL_WIDTH)
-    .padding(10)
-    .backgroundColor(ResManager.getDefaultColor())
+        Text('发布').fontSize(9).fontColor(Color.White).fontWeight(FontWeight.Bold)
+      }.width('10%')
+    }.width(StyleConstants.FULL_WIDTH).padding(10).backgroundColor(ResManager.getDefaultColor())
 
   }
 
@@ -75,9 +55,8 @@ export struct HomePage {
 
       this.SearchTitle()
 
-      CategoryTabBar({needChange:$needChange})
-    }
-    .backgroundColor(this.needChange?ResManager.getDefaultColor():Color.White)
+      CategoryTabBar({ needChange: $needChange })
+    }.backgroundColor(this.needChange ? ResManager.getDefaultColor() : Color.White)
 
   }
 }

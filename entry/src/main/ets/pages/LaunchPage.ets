@@ -1,21 +1,21 @@
-
 import router from '@ohos.router'
-import {ResManager} from "common"
+import { ResManager } from 'common'
+
+
 @Entry
 @Component
 struct LaunchPage {
-
-  aboutToAppear(){
-    setTimeout(()=>{
-      router.replaceUrl({url:"pages/MainPage"})
-    },2000)
+  aboutToAppear() {
+    setTimeout(() => {
+      router.replaceUrl({ url: "pages/MainPage" })
+    }, 2000)
   }
 
   build() {
 
     Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center }) {
       Column() {
-        Text('看见更大的世界')
+        Text('拒绝假新闻~')
           .fontSize(36)
           .fontColor(ResManager.getDefaultColor())
       }
@@ -36,7 +36,7 @@ struct LaunchPage {
           .objectFit(ImageFit.Contain)
           .padding({ left: 10 })
       }
-      .padding({bottom:10})
+      .padding({ bottom: 10 })
 
       Text('火山引擎提供计算服务')
         .fontSize(10)

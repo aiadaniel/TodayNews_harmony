@@ -5,9 +5,9 @@ import { otherView } from './otherView';
 @Component
 export struct topBackgroundView {
   @Prop scaleValue: number;
+  private backgroundHeight: number = 250;
+  private linearHeight: number = 150;
 
-  private backgroundHeight:number = 250;
-  private linearHeight:number = 150;
   build() {
 
     Column() {
@@ -19,7 +19,7 @@ export struct topBackgroundView {
           .scale({ x: this.scaleValue, y: this.scaleValue })
           .height(this.backgroundHeight)
           .objectFit(ImageFit.Cover)
-        Column()
+        Column()//底部往上透明渐变
           .width('100%')
           .height(this.linearHeight)
           .linearGradient({
@@ -38,19 +38,17 @@ export struct topBackgroundView {
 
 
 @Component
-export struct navBarView {
+export struct navBarView {//我的  扫码  发布 设置
+  @Prop opNav: number;
+  @Prop colorNavBar: string;
+  private navHeight: number = 56;
 
-  @Prop opNav:number;
-
-  @Prop colorNavBar:string;
-
-  private navHeight:number = 56;
   build() {
     Row() {
       Stack({ alignContent: Alignment.Start }) {
         Stack() {
 
-          Image(this.opNav === 1 ? $r('app.media.profile_scan_code_Normal') : $r('app.media.scan_icon_Normal'))
+          Image(this.opNav === 1 ? $r('app.media.profile_scan_code_Normal') : $r('app.media.scan_icon_Normal'))//扫码
             .width(24)
             .height(24)
             .onClick(() => {

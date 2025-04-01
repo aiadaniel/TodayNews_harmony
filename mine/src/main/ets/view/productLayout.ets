@@ -1,4 +1,3 @@
-import emitter from '@ohos.events.emitter';
 import { LocalDataManager } from '../viewmodel/LocalDataManager';
 
 import { productModel } from '../viewmodel/productModel';
@@ -7,18 +6,17 @@ import { productView } from './productView';
 
 @Component
 export struct productLayout {
-  private localManager: LocalDataManager = LocalDataManager.instance();
   @State productList: Array<productModel> = [];
-
   @Link @Watch('changeIndex') currentIndex: number;
+  private localManager: LocalDataManager = LocalDataManager.instance();
 
-
-  aboutToAppear(){
+  aboutToAppear() {
     this.changeIndex();
   }
-  changeIndex(){
 
-    var array: Array<productModel> = [];
+  changeIndex() {
+
+    let array: Array<productModel> = [];
     if (this.currentIndex === 0) {
       array = this.localManager.queryProductList();
     } else {
@@ -41,7 +39,7 @@ export struct productLayout {
           productView({ product: product })
         }
 
-      }, item => JSON.stringify(item))
+      }, (item: productModel) => JSON.stringify(item))
 
     }
     .backgroundColor(Color.White)

@@ -3,7 +3,7 @@ import { productModel } from '../viewmodel/productModel';
 
 @Component
 export struct productView {
-  product: productModel;
+  product?: productModel;
 
   aboutToAppear() {
 
@@ -13,16 +13,16 @@ export struct productView {
     Column() {
 
       Row() {
-        Image(this.product.profile.profileImg)
+        Image(this.product?.profile.profileImg)
           .width(40)
           .height(40)
           .borderRadius(20)
         Column() {
-          Text(this.product.profile.nickName)
+          Text(this.product?.profile.nickName)
             .width('60%')
             .height(20)
             .fontWeight(FontWeight.Bold)
-          Text(this.product.profile.time)
+          Text(this.product?.profile.time)
             .width('60%')
             .fontSize(14)
             .fontColor(0x919291)
@@ -32,29 +32,29 @@ export struct productView {
 
       }.width('100%')
 
-      Text(this.product.text)
+      Text(this.product?.text)
         .textAlign(TextAlign.Start)
         .width("100%")
-        .margin({bottom:10,top:10})
+        .margin({ bottom: 10, top: 10 })
 
-      Image(this.product.icon)
+      Image(this.product?.icon)
         .width('100%')
         .height(200)
 
-      this.bottomBar(this.product.commentCount,this.product.likeCount)
+      this.bottomBar(this.product?.commentCount!, this.product?.likeCount!)
 
     }
-    .margin({left:10,right:10,top:10})
+    .margin({ left: 10, right: 10, top: 10 })
   }
 
   @Builder
-  bottomBar(commentCount:number,likeCount:number) {
+  bottomBar(commentCount: number, likeCount: number) {
 
-    Flex({ direction: FlexDirection.Row,justifyContent:FlexAlign.SpaceBetween }) {
+    Flex({ direction: FlexDirection.Row, justifyContent: FlexAlign.SpaceBetween }) {
 
       this.bottomItemButton('分享', $r('app.media.hot_inner_flow_share_Normal'))
-      this.bottomItemButton(commentCount===0?'评论':commentCount.toString(), $r('app.media.comment_Normal'))
-      this.bottomItemButton(likeCount===0?'喜欢':likeCount.toString(), $r('app.media.digg_heart_icon_32_Normal'))
+      this.bottomItemButton(commentCount === 0 ? '评论' : commentCount.toString(), $r('app.media.comment_Normal'))
+      this.bottomItemButton(likeCount === 0 ? '喜欢' : likeCount.toString(), $r('app.media.digg_heart_icon_32_Normal'))
       this.bottomItemButton('收藏', $r('app.media.love_allshare_Normal'))
     }
 

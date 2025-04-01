@@ -1,7 +1,6 @@
 import { Constants, ResManager } from 'common';
-import systemTime from '@ohos.systemDateTime'
+import systemTime from '@ohos.systemDateTime';
 import { DataModel, ImageList } from '../model/DataModel';
-import systemDateTime from '@ohos.systemDateTime';
 
 @Component
 export struct MoreNewsView {
@@ -12,14 +11,12 @@ export struct MoreNewsView {
   @State timeShow: string = "";
 
   aboutToAppear() {
-
     systemTime.getCurrentTime(false, (error, time) => {
       let temp = time / 1000 - this.itemData.display_dt;
       this.day = Math.trunc(temp / 3600 / 24);
       this.hour = Math.trunc((temp % (3600 * 24)) / 3600);
       this.minute = Math.trunc((temp % 3600) / 60);
-      let aa;
-
+      // let aa;
       if (this.day > 0) {
         this.timeShow = `${this.day}天前`;
       } else if (this.hour > 0) {
@@ -27,13 +24,10 @@ export struct MoreNewsView {
       } else if (this.minute > 0) {
         this.timeShow = `${this.minute}分钟前`;
       }
-
-
     })
-
   }
 
-  build() {
+  build() {//三图
 
     Column() {
       Text(this.itemData.title)
@@ -74,10 +68,8 @@ export struct MoreNewsView {
 
       }
 
-
       Divider().color('#F0EFEF').strokeWidth(0.5)
         .padding({ top: Constants.ITEM_SPACE })
-
     }
     .padding({ left: Constants.ITEM_SPACE, right: Constants.ITEM_SPACE, top: Constants.ITEM_SPACE })
     .alignItems(HorizontalAlign.Start)

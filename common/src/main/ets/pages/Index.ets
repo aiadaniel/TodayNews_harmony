@@ -1,4 +1,6 @@
 import router from '@ohos.router'
+import { BusinessError } from '@kit.BasicServicesKit'
+
 @Entry
 @Component
 struct Index {
@@ -8,13 +10,13 @@ struct Index {
     Row() {
       Column() {
         Button('点击跳转msy')
-          .onClick(()=>{
+          .onClick(() => {
 
             router.pushUrl({
               url: '@bundle:com.news.today/library/ets/components/homepage/HomePage'
             }).then(() => {
               console.log("push page success");
-            }).catch(err => {
+            }).catch((err: BusinessError) => {
               console.error(`pushUrl failed, code is ${err.code}, message is ${err.message}`);
             })
 

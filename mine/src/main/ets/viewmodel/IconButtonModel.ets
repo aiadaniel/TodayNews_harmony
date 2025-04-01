@@ -1,6 +1,3 @@
-
-
-
 @Observed
 export class IconButtonModel {
   icon: Resource;

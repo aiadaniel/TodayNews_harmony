@@ -1,6 +1,5 @@
-
 import { TabModel } from '../pages/TabBarLayout';
-import {BasicDataSource} from './BasicDataSource'
+import { BasicDataSource } from './BasicDataSource';
 
 
 export class TabBarDataSource extends BasicDataSource {
@@ -10,11 +9,11 @@ export class TabBarDataSource extends BasicDataSource {
     return this.dataArray.length;
   }
 
-  public  getDataArr ():TabModel[]{
+  public getDataArr(): TabModel[] {
     return this.dataArray;
   }
 
-  public getData(index: number): any {
+  public getData(index: number): TabModel {
     return this.dataArray[index];
   }
 

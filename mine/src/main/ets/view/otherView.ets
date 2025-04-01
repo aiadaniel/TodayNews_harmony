@@ -1,9 +1,10 @@
-import { IconButtonModel } from '../viewmodel/IconButtonModel'
-import { IconButton } from './IconButton'
+import { IconButtonModel } from '../viewmodel/IconButtonModel';
+import { IconButton } from './IconButton';
 
 @Component
 export struct otherView {
-  otherHeight:number = 150;
+  otherHeight: number = 150;
+
   build() {
     Column() {
       Text("对未来的真正慷慨，是把一切都献给现在。")
@@ -62,7 +63,7 @@ export struct otherView {
 
 @Component
 export struct iconDockView {
-  buttons: IconButtonModel[];
+  buttons: IconButtonModel[] = [];
 
   @Styles
   cardStyle(){

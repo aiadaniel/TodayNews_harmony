@@ -1,6 +1,6 @@
 import { Constants, ResManager } from 'common';
-import systemTime from '@ohos.systemDateTime'
-import { DataModel, ImageList } from '../model/DataModel';
+import systemTime from '@ohos.systemDateTime';
+import { DataModel } from '../model/DataModel';
 
 @Component
 export struct MiddleNewsView {
@@ -11,13 +11,11 @@ export struct MiddleNewsView {
   @State timeShow: string = "";
 
   aboutToAppear() {
-
     systemTime.getCurrentTime(false, (error, time) => {
       let temp = time / 1000 - this.itemData.display_dt;
       this.day = Math.trunc(temp / 3600 / 24);
       this.hour = Math.trunc((temp % (3600 * 24)) / 3600);
       this.minute = Math.trunc((temp % 3600) / 60);
-
 
       if (this.day > 0) {
         this.timeShow = `${this.day}天前`;
@@ -26,13 +24,10 @@ export struct MiddleNewsView {
       } else if (this.minute > 0) {
         this.timeShow = `${this.minute}分钟前`;
       }
-
-
     })
-
   }
 
-  build() {
+  build() {//右侧有图图文效果
 
     Column() {
       Flex() {
@@ -50,7 +45,7 @@ export struct MiddleNewsView {
             Text(`${this.itemData.comment_count}评论`)
               .fontSize(9)
               .padding({ right: 10 })
-            Text(this.hour<1?`${this.minute}分钟前`:`${this.hour}小时前`)
+            Text(this.hour < 1 ? `${this.minute}分钟前` : `${this.hour}小时前`)
               .fontSize(9)
               .padding({ right: Constants.ITEM_SPACE })
 
@@ -70,7 +65,6 @@ export struct MiddleNewsView {
           .margin({ left: 10 })
 
       }.padding({ left: Constants.ITEM_SPACE, right: Constants.ITEM_SPACE, top: Constants.ITEM_SPACE })
-
 
       Divider().color('#F0EFEF').strokeWidth(0.5)
         .padding({ top: Constants.ITEM_SPACE })

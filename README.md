@@ -13,6 +13,7 @@ Runtime version: 17.0.6+10-b829.5 x86_64
 VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
 
 ## 运行前准备：
+
 1、入口module选择 entry
 <img src="./markdownImg/1.png">
 2、修改配置
@@ -23,14 +24,13 @@ VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
 # 二、运行效果
 
 ## 图片展示
+
 <img src="./markdownImg/001.png">
 <img src="./markdownImg/002.png">
 <img src="./markdownImg/003.png">
 <img src="./markdownImg/004.png">
 <img src="./markdownImg/004.png">
 <img src="./markdownImg/005.png">
-
-
 
 ## 视频地址在markdownImg文件夹里面
 

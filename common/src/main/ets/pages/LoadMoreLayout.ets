@@ -1,16 +1,16 @@
-
 import { Constants } from '../constants/Constants';
 
 
 @Component
-export  struct LoadMoreLayout {
+export struct LoadMoreLayout {
   @State offsetX: number = -60;
+
   aboutToAppear() {
 
-    setTimeout(()=>{
-      this.offsetX+=100;
+    setTimeout(() => {
+      this.offsetX += 100;
 
-    },10)
+    }, 10)
 
   }
 

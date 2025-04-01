@@ -1,6 +1,6 @@
 import { Constants, ResManager } from 'common';
-import { DataModel, ImageList } from '../model/DataModel';
-import systemTime from '@ohos.systemDateTime'
+import { DataModel } from '../model/DataModel';
+import systemTime from '@ohos.systemDateTime';
 
 @Component
 export struct LargeNewsView {
@@ -11,7 +11,6 @@ export struct LargeNewsView {
   @State timeShow: string = "";
 
   aboutToAppear() {
-
     systemTime.getCurrentTime(false, (error, time) => {
       let temp = time / 1000 - this.itemData.display_dt;
       this.day = Math.trunc(temp / 3600 / 24);
@@ -25,13 +24,10 @@ export struct LargeNewsView {
       } else if (this.minute > 0) {
         this.timeShow = `${this.minute}分钟前`;
       }
-
-
     })
-
   }
 
-  build() {
+  build() {//大视频图文效果
 
     Column() {
       Flex({ direction: FlexDirection.Column }) {
@@ -65,7 +61,7 @@ export struct LargeNewsView {
           Text(`${this.itemData.comment_count}评论`)
             .fontSize(9)
             .padding({ right: Constants.ITEM_SPACE })
-          Text(this.hour<1?`${this.minute}分钟前`:`${this.hour}小时前`)
+          Text(this.hour < 1 ? `${this.minute}分钟前` : `${this.hour}小时前`)
             .fontSize(9)
             .padding({ right: Constants.ITEM_SPACE })
 

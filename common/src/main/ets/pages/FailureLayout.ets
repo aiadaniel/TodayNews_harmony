@@ -1,11 +1,10 @@
-
 import { Constants } from '../constants/Constants';
 import { ResManager } from '../constants/ResManager';
 
-
 @Component
-export  struct FailureLayout {
-  reloadAction = () => {};
+export struct FailureLayout {
+  reloadAction = () => {
+  };
 
   build() {
     Column() {
@@ -17,7 +16,7 @@ export  struct FailureLayout {
         .opacity(0.6)
         .fontSize(12)
         .fontColor(0x182431)
-        .margin({ top: 12 ,bottom:12})
+        .margin({ top: 12, bottom: 12 })
       Text('重试')
         .borderRadius(3)
         .borderWidth(1)
@@ -28,7 +27,7 @@ export  struct FailureLayout {
         .onClick(this.reloadAction)
         .textAlign(TextAlign.Center)
     }
-    .margin({top:100})
+    .margin({ top: 100 })
     .backgroundColor(Color.White)
     .width(Constants.FULL_PERCENT)
     .height(Constants.FULL_PERCENT)

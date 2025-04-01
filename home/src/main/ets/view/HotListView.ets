@@ -5,15 +5,16 @@ import { hotListModel, LocalDataManager } from '../viewmodel/hotData';
 
 @Component
 export struct HotListView {
-  private localManager: LocalDataManager = LocalDataManager.instance();
-  array: Array<hotListModel> = this.localManager.queryFirstList()
-  private listScroller: Scroller = new Scroller();
-  private hotTitleHeight: number = 55;
   @State offsetY: number = 0;
   @State distance: number = 18;
+  private localManager: LocalDataManager = LocalDataManager.instance();
+  array: Array<hotListModel> = this.localManager.queryFirstList()
   secondData: Array<hotListModel> = this.localManager.querySecondList()
+  private listScroller: Scroller = new Scroller();
+  private hotTitleHeight: number = 55;
 
-  @Builder itemHead() {
+  @Builder
+  itemHead() {
     Row() {
       Column() {
         Column() {
@@ -29,7 +30,8 @@ export struct HotListView {
             .visibility(this.offsetY >= 10 ? Visibility.Hidden : Visibility.Visible)
 
         }
-        .height(this.hotTitleHeight - (this.offsetY > 0 ? (this.offsetY >= this.distance ? this.distance : this.offsetY) : 0))
+        .height(this.hotTitleHeight -
+          (this.offsetY > 0 ? (this.offsetY >= this.distance ? this.distance : this.offsetY) : 0))
         .borderRadius(8)
         .backgroundColor(Color.White)
         .padding(10)
@@ -57,7 +59,8 @@ export struct HotListView {
 
         }
         .borderRadius(8)
-        .height(this.hotTitleHeight - (this.offsetY > 0 ? (this.offsetY >= this.distance ? this.distance : this.offsetY) : 0))
+        .height(this.hotTitleHeight -
+          (this.offsetY > 0 ? (this.offsetY >= this.distance ? this.distance : this.offsetY) : 0))
         .backgroundColor(0x99ffffff)
         .padding(10)
 
@@ -85,7 +88,8 @@ export struct HotListView {
 
         }
         .borderRadius(8)
-        .height(this.hotTitleHeight - (this.offsetY > 0 ? (this.offsetY >= this.distance ? this.distance : this.offsetY) : 0))
+        .height(this.hotTitleHeight -
+          (this.offsetY > 0 ? (this.offsetY >= this.distance ? this.distance : this.offsetY) : 0))
         .backgroundColor(0x99ffffff)
         .padding(10)
 
@@ -101,43 +105,35 @@ export struct HotListView {
     .zIndex(3)
     .alignItems(VerticalAlign.Center)
     .justifyContent(FlexAlign.SpaceEvenly)
-    .height(this.hotTitleHeight + 25 - (this.offsetY > 0 ? (this.offsetY >= this.distance ? this.distance : this.offsetY) : 0))
+    .height(this.hotTitleHeight + 25 -
+      (this.offsetY > 0 ? (this.offsetY >= this.distance ? this.distance : this.offsetY) : 0))
     .width('100%')
     .backgroundColor(ResManager.getDefaultColor())
   }
 
   refreshNewsData() {
-
     return new Promise<string>((resolve, reject) => {
-
       setTimeout(() => {
-
         resolve("成功")
-
       }, 1000)
-
     })
-
-
-  }
-
-  @Builder ListLayout() {
-
-    RefreshPullView({
-      onRefresh: () => this.refreshNewsData(),
-      ldColor:'#ffffff',
-      bgColor:ResManager.getDefaultColor(),
-      tipStr:'已更新到最新',
-      customList: () => {
-        this.getListView()
-      }
-
-    })
-
   }
 
   @Builder
-  getListView(){
+  ListLayout() {
+    RefreshPullView({
+      onRefresh: (): Promise<string> => this.refreshNewsData(),
+      ldColor: '#ffffff',
+      bgColor: ResManager.getDefaultColor(),
+      tipStr: '已更新到最新',
+      customList: () => {
+        this.getListView()
+      }
+    })
+  }
+
+  @Builder
+  getListView() {
 
     Stack({ alignContent: Alignment.Top }) {
 
@@ -201,8 +197,7 @@ export struct HotListView {
               bottomRight: (index === this.array.length - 1) ? 10 : 0
             })
 
-          }, item => item.key)
-
+          }/*, (item) => item.key*/)
 
           ListItem() {
             Divider()
@@ -241,17 +236,11 @@ export struct HotListView {
   }
 
   build() {
-
-
     Scroll() {
       Column() {
-
-
         this.ListLayout()
       }
-
     }
-
   }
 }
 
